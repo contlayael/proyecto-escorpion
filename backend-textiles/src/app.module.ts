@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductsModule } from './products/products.module';
 
@@ -13,13 +11,15 @@ import { ProductsModule } from './products/products.module';
       username: 'postgres', // Usuario por defecto
       password: 'greenevilday15', // LA QUE PUSISTE AL INSTALAR
       database: 'db_textiles',
-      autoLoadEntities: true, // Esto cargará nuestras clases automáticamente
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true, // ¡IMPORTANTE! Crea las tablas automáticamente (solo en desarrollo)
+      //entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      //entities: [Product],
+      entities: [__dirname + '/products/entities/*.entity{.ts,.js}'],
+      //autoLoadEntities: true, // Esto cargará nuestras clases automáticamente
+      //synchronize: true, // ¡IMPORTANTE! Crea las tablas automáticamente (solo en desarrollo)
     }),
     ProductsModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
