@@ -61,6 +61,7 @@
                   <span class="text-sm font-bold text-green-600">{{ product.stock }} unidades</span>
                 </div>
                 <button
+                  (click)="addToCart(product)"
                   class="bg-gray-900 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-xl text-sm font-bold transition-all transform active:scale-95 shadow-lg shadow-gray-200"
                 >
                   Apartar

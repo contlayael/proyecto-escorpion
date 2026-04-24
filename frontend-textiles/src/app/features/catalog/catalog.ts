@@ -1,6 +1,8 @@
 import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { CartService } from '../../core/services/cart';
+import { Product } from '../../core/models/product.model';
 
 @Component({
   selector: 'app-catalog',
@@ -9,10 +11,11 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './catalog.html'
 })
 export class Catalog implements OnInit { // <-- Prometemos usar OnInit
-  products: any[] = [];
+  products: Product[] = [];
   isLoading = true;
   private http = inject(HttpClient);
   private cdr = inject(ChangeDetectorRef);
+  private cartService = inject(CartService); // Inyectamos el nuevo servicio
 
   // <-- AQUÍ ESTÁ LA FUNCIÓN QUE CUMPLE LA PROMESA
   ngOnInit() {
@@ -35,5 +38,10 @@ export class Catalog implements OnInit { // <-- Prometemos usar OnInit
         this.cdr.detectChanges();// También avisamos si hay error
       }
     });
+  }
+
+  addToCart(product: Product) {
+    this.cartService.addToCart(product);
+    alert(`${product.name} agregado al carrito`); // Temporal, luego pondremos algo más pro
   }
 }

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { NavbarComponent } from './core/components/navbar/navbar';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
-  template: `<router-outlet></router-outlet>` // Ni una sola línea de HTML extra
+  imports: [RouterOutlet, NavbarComponent],
+  template: `<app-navbar></app-navbar><router-outlet></router-outlet>` // Ni una sola línea de HTML extra
 })
 export class App {}
