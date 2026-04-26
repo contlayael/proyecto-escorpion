@@ -1,0 +1,91 @@
+<div class="bg-gray-50 min-h-screen py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h1 class="text-3xl font-black text-gray-900 mb-8">Tu Carrito de Compra</h1>
+
+    @if (items().length === 0) {
+      <div class="bg-white rounded-2xl p-12 text-center shadow-sm">
+        <p class="text-gray-500 mb-6 text-lg">Tu carrito está vacío actualmente.</p>
+        <a
+          routerLink="/"
+          class="bg-indigo-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-indigo-700 transition-all"
+        >
+          Ir al catálogo
+        </a>
+      </div>
+    } @else {
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2 space-y-4">
+          @for (item of items(); track item.product.id) {
+            <div
+              class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-6"
+            >
+              <div
+                class="h-24 w-24 bg-gray-100 rounded-xl flex-shrink-0 flex items-center justify-center text-gray-400"
+              >
+                📦
+              </div>
+
+              <div class="flex-1">
+                <h3 class="text-lg font-bold text-gray-900">{{ item.product.name }}</h3>
+                <p class="text-indigo-600 font-bold">${{ item.product.price_wholesale }} c/u</p>
+              </div>
+
+              <div class="flex items-center gap-3 bg-gray-50 p-2 rounded-lg border">
+                <button
+                  (click)="decrement(item.product.id, item.quantity)"
+                  class="h-8 w-8 flex items-center justify-center bg-white rounded shadow-sm hover:bg-gray-100 font-bold"
+                >
+                  -
+                </button>
+                <span class="w-8 text-center font-bold text-gray-700">{{ item.quantity }}</span>
+                <button
+                  (click)="increment(item.product.id, item.quantity)"
+                  class="h-8 w-8 flex items-center justify-center bg-white rounded shadow-sm hover:bg-gray-100 font-bold"
+                >
+                  +
+                </button>
+              </div>
+
+              <div class="text-right min-w-[100px]">
+                <p class="text-lg font-black text-gray-900">
+                  ${{ item.product.price_wholesale * item.quantity | number: '1.2-2' }}
+                </p>
+                <button
+                  (click)="remove(item.product.id)"
+                  class="text-red-500 text-xs font-bold hover:underline"
+                >
+                  Eliminar
+                </button>
+              </div>
+            </div>
+          }
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 shadow-md border border-gray-100 h-fit sticky top-24">
+          <h2 class="text-xl font-bold mb-6">Resumen de Pedido</h2>
+          <div class="space-y-4 mb-6">
+            <div class="flex justify-between text-gray-600">
+              <span>Subtotal</span>
+              <span>${{ total() | number: '1.2-2' }}</span>
+            </div>
+            <div class="flex justify-between text-gray-600">
+              <span>Envío</span>
+              <span class="text-green-600 font-bold">Gratis</span>
+            </div>
+            <div class="border-t pt-4 flex justify-between">
+              <span class="text-lg font-bold">Total</span>
+              <span class="text-2xl font-black text-indigo-600"
+                >${{ total() | number: '1.2-2' }}</span
+              >
+            </div>
+          </div>
+          <button
+            class="w-full bg-gray-900 text-white py-4 rounded-xl font-black hover:bg-indigo-700 transition-all shadow-lg shadow-gray-200 uppercase tracking-widest text-sm"
+          >
+            Finalizar Compra
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+</div>

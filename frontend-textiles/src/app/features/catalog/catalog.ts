@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { CartService } from '../../core/services/cart';
 import { Product } from '../../core/models/product.model';
+import { ToastService } from '../../core/services/toast';
 
 @Component({
   selector: 'app-catalog',
@@ -16,6 +17,7 @@ export class Catalog implements OnInit { // <-- Prometemos usar OnInit
   private http = inject(HttpClient);
   private cdr = inject(ChangeDetectorRef);
   private cartService = inject(CartService); // Inyectamos el nuevo servicio
+  private toastService = inject(ToastService); // Inyectamos nuestro nuevo servicio
 
   // <-- AQUÍ ESTÁ LA FUNCIÓN QUE CUMPLE LA PROMESA
   ngOnInit() {
@@ -42,6 +44,7 @@ export class Catalog implements OnInit { // <-- Prometemos usar OnInit
 
   addToCart(product: Product) {
     this.cartService.addToCart(product);
-    alert(`${product.name} agregado al carrito`); // Temporal, luego pondremos algo más pro
+    //Toas elegante
+    this.toastService.show(`¡${product.name} agregado al carrito!`);
   }
 }
