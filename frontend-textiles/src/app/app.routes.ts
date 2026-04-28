@@ -6,6 +6,7 @@ export const routes: Routes = [
   { path: '', loadComponent: () => import('./features/catalog/catalog').then(m => m.Catalog) },
   // Ruta carrito de compras
   { path: 'cart', loadComponent: () => import('./features/cart/cart').then(m => m.CartComponent) },
+  { path: 'checkout', loadComponent: () => import('./features/checkout/checkout').then(m => m.CheckoutComponent) },
   // Redirección por seguridad si escriben una ruta que no existe
   { path: '**', redirectTo: '' } 
 ];
