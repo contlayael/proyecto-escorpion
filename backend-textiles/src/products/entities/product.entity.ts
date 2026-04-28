@@ -12,10 +12,10 @@ export class Product {
   @Column({ type: 'text', nullable: true })
   description!: string;
 
-  @Column({ type: 'float', precision: 10, scale: 2 })
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
   price_retail!: number; // Precio unitario (menudeo)
 
-  @Column({ type: 'float', precision: 10, scale: 2 })
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
   price_wholesale!: number; // Precio mayoreo
 
   @Column()
