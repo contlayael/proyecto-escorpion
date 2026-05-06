@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { CartService } from '../../core/services/cart';
 import { Product } from '../../core/models/product.model';
 import { ToastService } from '../../core/services/toast';
+import { environment } from '../../../environments/environment'; // <-- IMPORTANTE: Importar sin el ".development"
 
 @Component({
   selector: 'app-catalog',
@@ -18,6 +19,7 @@ export class Catalog implements OnInit { // <-- Prometemos usar OnInit
   private cdr = inject(ChangeDetectorRef);
   private cartService = inject(CartService); // Inyectamos el nuevo servicio
   private toastService = inject(ToastService); // Inyectamos nuestro nuevo servicio
+   private apiUrl = `${environment.apiUrl}/products`
 
   // <-- AQUÍ ESTÁ LA FUNCIÓN QUE CUMPLE LA PROMESA
   ngOnInit() {
@@ -26,7 +28,7 @@ export class Catalog implements OnInit { // <-- Prometemos usar OnInit
     console.log('Iniciando petición al backend...'); 
     
     // 2. Lo inyectamos en la URL (?cb=123456789)
-    this.http.get<any[]>(`http://localhost:3000/products?cb=${cacheBuster}`).subscribe({
+    this.http.get<any[]>(`${this.apiUrl}?cb=${cacheBuster}`).subscribe({
       next: (data) => {
         console.log('¡Éxito! Datos recibidos:', data);
         this.products = data;
