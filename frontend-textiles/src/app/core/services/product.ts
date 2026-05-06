@@ -11,7 +11,7 @@ import { Product } from '../models/product.model';
 export class ProductService {
   private http = inject(HttpClient);
   //private apiUrl = 'http://localhost:3000/products'; // La ruta de nuestro NestJS
-  private apiUrl = `${environment.apiUrl}/product`
+  private apiUrl = `${environment.apiUrl}/products`
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiUrl);
   }
